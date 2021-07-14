@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "fabric-coord-display",
+  "version": "${version}",
+
+  "name": "Fabric Coord Display",
+  "description": "Server side coordinate command",
+  "authors": [
+    "ojs05"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "me.purplesmp.ojs05.fabriccoorddisplay.FabricCoordDisplay"
+    ]
+  },
+  "mixins": [
+    "fabric-coord-display.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.6",
+    "fabric": "*",
+    "minecraft": ">=1.17"
+  }
+}
