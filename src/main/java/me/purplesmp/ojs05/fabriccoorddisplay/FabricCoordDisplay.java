@@ -50,11 +50,27 @@ public class FabricCoordDisplay implements ModInitializer {
                     return 1;
                 })
                 .then(argument("target", EntityArgumentType.player())
-
+                        .requires(Permissions.require("coordinates.command.admin"))
                         .executes(context -> {
+                            ServerPlayerEntity requestedPlayer = EntityArgumentType.getPlayer(context,"target");
+                            final int x = requestedPlayer.getBlockX();
+                            final int y = requestedPlayer.getBlockY();
+                            final int z = requestedPlayer.getBlockZ();
+                            final String player = requestedPlayer.getDisplayName().getString().formatted(Formatting.GOLD);
 
+                            String world = null;
 
-                            context.getSource().sendFeedback(new LiteralText("blah"), true);
+                            if(requestedPlayer.world.getRegistryKey().equals(World.OVERWORLD)){
+                                world = " Overworld";
+                            }
+                            if(requestedPlayer.world.getRegistryKey().equals(World.NETHER)){
+                                world = " Nether";
+                            }
+                            if(requestedPlayer.world.getRegistryKey().equals(World.END)){
+                                world = " End";
+                            }
+
+                            context.getSource().sendFeedback(new LiteralText(Formatting.GOLD + player + Formatting.AQUA + "'s coordinates are " + Formatting.GOLD + x + ", " + y + ", " + z + Formatting.AQUA + " in the" + Formatting.GOLD + world), true);
                             return 1;
                         })
                 )
