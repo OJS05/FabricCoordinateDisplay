@@ -41,30 +41,61 @@ public class CoordCommand {
                     sender.getServer().getPlayerManager().broadcastChatMessage(new LiteralText(Formatting.GOLD + player + Formatting.AQUA + "'s coordinates are " + Formatting.GOLD + x + ", " + y + ", " + z + Formatting.AQUA + " in the" + Formatting.GOLD + world), MessageType.CHAT,sender.getUuid());
                     return 1;
                 })
-                .then(argument("target", EntityArgumentType.player())
-                        .requires(Permissions.require("tools.coords.moderator"))
+                .then(argument("target",EntityArgumentType.player())
+                        .requires(Permissions.require("tools.coords.main"))
                         .executes(context -> {
-                            ServerPlayerEntity requestedPlayer = EntityArgumentType.getPlayer(context,"target");
-                            final int x = requestedPlayer.getBlockX();
-                            final int y = requestedPlayer.getBlockY();
-                            final int z = requestedPlayer.getBlockZ();
-                            final String player = requestedPlayer.getDisplayName().getString().formatted(Formatting.GOLD);
+
+                            ServerPlayerEntity sender = context.getSource().getPlayer();
+                            final String senderName = sender.getDisplayName().getString().formatted(Formatting.GOLD);
+                            ServerPlayerEntity target = EntityArgumentType.getPlayer(context,"target");
+
+                            final int x = sender.getBlockX();
+                            final int y = sender.getBlockY();
+                            final int z = sender.getBlockZ();
 
                             String world = null;
 
-                            if(requestedPlayer.world.getRegistryKey().equals(World.OVERWORLD)){
+                            if(sender.world.getRegistryKey().equals(World.OVERWORLD)){
                                 world = " Overworld";
                             }
-                            if(requestedPlayer.world.getRegistryKey().equals(World.NETHER)){
+                            if(sender.world.getRegistryKey().equals(World.NETHER)){
                                 world = " Nether";
                             }
-                            if(requestedPlayer.world.getRegistryKey().equals(World.END)){
+                            if(sender.world.getRegistryKey().equals(World.END)){
                                 world = " End";
                             }
+                            
+                            target.sendMessage(new LiteralText(Formatting.GOLD + senderName + Formatting.AQUA + "'s coordinates are " + Formatting.GOLD + x + ", " + y + ", " + z + Formatting.AQUA + " in the" + Formatting.GOLD + world),MessageType.CHAT, sender.getUuid());
 
-                            context.getSource().sendFeedback(new LiteralText(Formatting.GOLD + player + Formatting.AQUA + "'s coordinates are " + Formatting.GOLD + x + ", " + y + ", " + z + Formatting.AQUA + " in the" + Formatting.GOLD + world), true);
                             return 1;
                         })
+                )
+                .then(literal("search")
+                        .then(argument("target", EntityArgumentType.player())
+                                .requires(Permissions.require("tools.coords.moderator"))
+                                .executes(context -> {
+                                    ServerPlayerEntity requestedPlayer = EntityArgumentType.getPlayer(context,"target");
+                                    final int x = requestedPlayer.getBlockX();
+                                    final int y = requestedPlayer.getBlockY();
+                                    final int z = requestedPlayer.getBlockZ();
+                                    final String player = requestedPlayer.getDisplayName().getString().formatted(Formatting.GOLD);
+
+                                    String world = null;
+
+                                    if(requestedPlayer.world.getRegistryKey().equals(World.OVERWORLD)){
+                                        world = " Overworld";
+                                    }
+                                    if(requestedPlayer.world.getRegistryKey().equals(World.NETHER)){
+                                        world = " Nether";
+                                    }
+                                    if(requestedPlayer.world.getRegistryKey().equals(World.END)){
+                                        world = " End";
+                                    }
+
+                                    context.getSource().sendFeedback(new LiteralText(Formatting.GOLD + player + Formatting.AQUA + "'s coordinates are " + Formatting.GOLD + x + ", " + y + ", " + z + Formatting.AQUA + " in the" + Formatting.GOLD + world), true);
+                                    return 1;
+                                })
+                        )
                 )
         ));
     }
