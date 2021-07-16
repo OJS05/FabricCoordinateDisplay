@@ -34,7 +34,7 @@ public class PortalCommand {
                         finalZ = z / 8;
                     }
 
-                    context.getSource().sendFeedback(new LiteralText(Formatting.AQUA + "You should place your portal at " + Formatting.GOLD + finalX + ", " + y + ", " + finalZ + "."), false);
+                    context.getSource().sendFeedback(new LiteralText(Formatting.AQUA + "You should place your portal at " + Formatting.GOLD + finalX + ", " + y + ", " + finalZ), false);
 
                     return 1;
                 })

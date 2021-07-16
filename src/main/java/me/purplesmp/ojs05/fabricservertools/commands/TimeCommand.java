@@ -14,7 +14,7 @@ public class TimeCommand {
                 .executes(context -> {
                     long time = context.getSource().getPlayer().world.getTime();
                     
-                    context.getSource().sendFeedback(new LiteralText(Formatting.AQUA + "The time  is " + Formatting.GOLD + time), false);
+                    context.getSource().sendFeedback(new LiteralText(Formatting.AQUA + "The time is " + Formatting.GOLD + time), false);
                     return 1;
                 })
         ));
