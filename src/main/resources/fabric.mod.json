@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "fabric-coord-display",
+  "id": "fabric-server-tools",
   "version": "${version}",
 
-  "name": "Fabric Coord Display",
-  "description": "Server side coordinate command",
+  "name": "Fabric Server Tools",
+  "description": "Helpful serverside commands",
   "authors": [
     "ojs05"
   ],
@@ -13,7 +13,7 @@
   "environment": "server",
   "entrypoints": {
     "main": [
-      "me.purplesmp.ojs05.fabriccoorddisplay.FabricServerTools"
+      "me.purplesmp.ojs05.fabricservertools.FabricServerTools"
     ]
   },
   "mixins": [
