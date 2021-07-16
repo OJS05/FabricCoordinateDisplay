@@ -13,7 +13,7 @@
   "environment": "server",
   "entrypoints": {
     "main": [
-      "me.purplesmp.ojs05.fabriccoorddisplay.FabricCoordDisplay"
+      "me.purplesmp.ojs05.fabriccoorddisplay.FabricServerTools"
     ]
   },
   "mixins": [
